@@ -34,12 +34,12 @@ end
 
 def gsub_birds(haystack, name, namespace)
   haystack.
+    gsub("com.twitter.birdname", "#{namespace}.#{name.downcase}").
+    gsub("com/twitter/birdname", "#{namespace.gsub('.', '/')}/#{name.downcase}").
     gsub("BirdName", name).
     gsub("birdname", name.downcase).
     gsub("bird_name", name.underscore).
-    gsub("birdName", name.camelize).
-    gsub("com.twitter", namespace).
-    gsub("com/twitter", namespace.gsub(".", "/"))
+    gsub("birdName", name.camelize)
 end
 
 require "erb"
