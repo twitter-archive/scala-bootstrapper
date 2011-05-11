@@ -1,14 +1,17 @@
 This creates a standard environment for your twitter-centric sbt/scala thrift service.
 
+Building:
+
+    :$ rake build
+    :$ gem install pkg/scala-bootstrapper-*.gem
+
 Usage:
 
-    :$ mkdir foo
-    :$ cd foo
-    :$ scala-bootstrapper foo
+    :$ mkdir birdname
+    :$ cd birdname
+    :$ scala-bootstrapper birdname
     :$ sbt update test
 
-If you want to track scala-bootstrapper generated files in Git:
+Tutorial:
 
-    :$ scala-bootstrapper --git foo
-
-To update files (with a new version of scala-bootstrapper), just run it again.
+    :$ less TUTORIAL.md
