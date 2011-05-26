@@ -68,7 +68,7 @@ if git
     sys("echo 'Project #{project_name}' > README")
     sys('git add .')
     sys("git commit -m'first commit'")
-    sys('git co -b scala-bootstrapper')
+    sys('git checkout -b scala-bootstrapper')
 
   else
     if `git ls-files -mdo` != ''
@@ -76,9 +76,9 @@ if git
     end
     $branch = `git branch`.grep(/^\*/).first.chomp.gsub(/^\* (.+)$/, '\1')
 
-    if !system('git co scala-bootstrapper')
+    if !system('git checkout scala-bootstrapper')
       $ex_post_facto = true
-      sys('git co -b scala-bootstrapper')
+      sys('git checkout -b scala-bootstrapper')
       # clean out any existing files on branch
       sys('rm .git/index')
       sys('git clean -fdx')
