@@ -43,8 +43,8 @@ def gsub_birds(haystack, name, namespace)
     gsub("birdName", name.camelize)
 end
 
-def sys(cmd)
-  system(cmd) || abort("failed: #{cmd}")
+def sys(cmd, abort_on_fail=true)
+  system(cmd + " &> /dev/null") || abort_on_fail && abort("failed: #{cmd}")
 end
 
 require "erb"
@@ -58,6 +58,7 @@ git = opts[:git]
 $overwrite_all = true if git
 $ex_post_facto = false
 $branch = 'master'
+$files = []
 
 if git
   if !File.exists?('.git')
@@ -65,23 +66,20 @@ if git
       abort('files in directory, no git repo.')
     end
     sys('git init')
-    sys("echo 'Project #{project_name}' > README")
+    sys('touch README.md')
     sys('git add .')
     sys("git commit -m'first commit'")
     sys('git checkout -b scala-bootstrapper')
 
   else
-    if `git ls-files -mdo` != ''
-      abort('uncommitted files in directory')
+    if `git status -s` != ''
+      abort('uncommitted files in directory.')
     end
     $branch = `git branch`.grep(/^\*/).first.chomp.gsub(/^\* (.+)$/, '\1')
 
-    if !system('git checkout scala-bootstrapper')
+    if !sys('git checkout scala-bootstrapper', false)
       $ex_post_facto = true
       sys('git checkout -b scala-bootstrapper')
-      # clean out any existing files on branch
-      sys('rm .git/index')
-      sys('git clean -fdx')
     end
   end
 end
@@ -108,10 +106,13 @@ Dir["#{root}/**/*"].select{|path| File.file?(path)}.each do |path|
   puts "writing #{target_path}"
   mkdir_p(File.dirname(target_path))
   File.open(target_path, "w") {|f| f.print(gsub_birds(template.result(binding), project_name, namespace)) }
+  $files << target_path
 end
 
 if File.exists?("src/scripts/startup.sh")
-  `mv src/scripts/startup.sh src/scripts/#{project_name.downcase}.sh`
+  startup = "src/scripts/#{project_name.downcase}.sh"
+  `mv src/scripts/startup.sh #{startup}`
+  $files << startup
 end
 
 [ "src/scripts/#{project_name.downcase}.sh", "src/scripts/console", "run" ].each do |executable|
@@ -119,8 +120,8 @@ end
 end
 
 if git
-  sys('git add .')
-  system("git commit -m'scala-bootstrapper'") # fails if no change
+  $files.each { |file| sys("git add #{file}") if File.exists?(file) }
+  sys("git commit -m'scala-bootstrapper'", false) # fails if no change
   sys("git checkout #{$branch}")
   sys('git merge --no-ff --no-commit scala-bootstrapper')
 
@@ -131,5 +132,21 @@ if git
     sys('git clean -fdx')
   end
 
-  system("git commit -m'merged scala-bootstrapper'") # fails if no change
+  sys("git commit -m'merged scala-bootstrapper'", false) # fails if no change
+end
+
+if $ex_post_facto
+  puts <<EOF
+Found existing .git directory; scala-bootstrapper branch created but
+generated files not merged to #{$branch}. To manually merge changes,
+run
+
+  git cherry-pick --no-commit scala-bootstrapper
+
+then
+
+  git commit
+
+once you have resolved any conflicts.
+EOF
 end
