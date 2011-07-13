@@ -127,7 +127,7 @@ example:
 framework that allows you to write semi-human-readable descriptions of
 how your service should behave and test that those descriptions are
 valid.  You already have some Specs code for your project in
-src/test/scala/com/twitter/birdname/BirdNameServiceImpl.scala.  Check
+src/test/scala/com/twitter/birdname/BirdNameServiceSpec.scala.  Check
 out the existing test and add a new one for the counter functionality
 we just added.
 
