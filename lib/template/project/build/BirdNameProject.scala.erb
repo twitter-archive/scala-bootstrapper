@@ -27,8 +27,9 @@ class BirdNameProject(info: ProjectInfo) extends StandardServiceProject(info)
   val libthrift = "thrift" % "libthrift" % "0.5.0"
   val util = "com.twitter" % "util" % "1.8.3"
 
-  override def originalThriftNamespaces = Map("BirdName" -> "com.twitter.birdname.thrift")
-  override val scalaThriftTargetNamespace = "com.twitter.birdname"
+  override def thriftNamespaces = List(
+    ThriftNamespace.fromRuby("BirdName").fromJava("com.twitter.birdname.thrift").toScala("com.twitter.birdname")
+  )
   
   val slf4jVersion = "1.5.11"
   val slf4jApi = "org.slf4j" % "slf4j-api" % slf4jVersion withSources() intransitive()
