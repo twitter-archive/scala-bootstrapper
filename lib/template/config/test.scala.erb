@@ -17,12 +17,6 @@ new BirdNameServiceConfig {
   // End user configuration
 
   // Expert-only: Ostrich stats and logger configuration.
-  admin.statsNodes = new StatsConfig {
-    reporters = new JsonStatsLoggerConfig {
-      loggerName = "stats"
-      serviceName = "birdname"
-    } :: new TimeSeriesCollectorConfig
-  }
 
   loggers =
     new LoggerConfig {
