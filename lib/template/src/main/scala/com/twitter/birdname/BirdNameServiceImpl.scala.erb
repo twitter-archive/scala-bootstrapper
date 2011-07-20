@@ -8,7 +8,7 @@ import config._
 class BirdNameServiceImpl(config: BirdNameServiceConfig) extends BirdNameServiceServer {
   val serverName = "BirdName"
   val thriftPort = config.thriftPort
-  
+
   /**
    * These services are based on finagle, which implements a nonblocking server.  If you
    * are making blocking rpc calls, it's really important that you run these actions in
