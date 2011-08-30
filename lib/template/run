@@ -103,7 +103,7 @@ done
 
 if [ $# -eq 0 ]; then
     echo "usage: $0 [-i INCLUDE] [-h HEAPSTER] [-ygd] CLASS ..." >&2
-    echo "  -i INCLUDE include in the classpath the project with the sbt root INCLUDE" >&2 
+    echo "  -i INCLUDE include in the classpath the project with the sbt root INCLUDE" >&2
     echo "  -h HEAPSTER use heapster in the directory HEAPSTER"  >&2
     echo "  -y enable yourkit debugging" >&2
     echo "  -g enable GC debugging/logging" >&2

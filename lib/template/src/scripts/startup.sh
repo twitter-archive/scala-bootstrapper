@@ -65,7 +65,7 @@ case "$1" in
       echo "already running."
       exit 0
     fi
-    
+
     ulimit -c unlimited || echo -n " (no coredump)"
     $DAEMON $daemon_args $daemon_start_args -- sh -c "echo "'$$'" > $pidfile; exec ${JAVA_HOME}/bin/java ${JAVA_OPTS} -jar ${APP_HOME}/${JAR_NAME}"
     tries=0
@@ -113,7 +113,7 @@ case "$1" in
     done
     echo "done."
   ;;
-  
+
   status)
     if running; then
       echo "$APP_NAME is running."
