@@ -23,10 +23,6 @@ class BirdNameProject(info: ProjectInfo) extends StandardServiceProject(info)
   val finagleT = "com.twitter" % "finagle-thrift" % finagleVersion
   val finagleO = "com.twitter" % "finagle-ostrich4" % finagleVersion
 
-  // thrift
-  val libthrift = "thrift" % "libthrift" % "0.5.0"
-  val util = "com.twitter" % "util" % "1.8.3"
-
   override def originalThriftNamespaces = Map("BirdName" -> "com.twitter.birdname.thrift")
   override val scalaThriftTargetNamespace = "com.twitter.birdname"
 
