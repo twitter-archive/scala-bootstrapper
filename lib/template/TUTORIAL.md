@@ -127,7 +127,7 @@ example:
 framework that allows you to write semi-human-readable descriptions of
 how your service should behave and test that those descriptions are
 valid.  You already have some Specs code for your project in
-src/test/scala/com/twitter/birdname/BirdNameServiceImpl.scala.  Check
+src/test/scala/com/twitter/birdname/BirdNameServiceSpec.scala.  Check
 out the existing test and add a new one for the counter functionality
 we just added.
 
@@ -137,10 +137,10 @@ we just added.
 
     "verify stats" in {
       val counters = Stats.getCounters
-      foofa.put("name", "bluebird")()
-      foofa.get("name")() mustEqual "bluebird"
-      counters.getOrElse("foofa.gets", 1) must_==1
-      counters.getOrElse("foofa.puts", 1) must_==1
+      birdname.put("name", "bluebird")()
+      birdname.get("name")() mustEqual "bluebird"
+      counters.getOrElse("birdname.gets", 1) must_==1
+      counters.getOrElse("birdname.puts", 1) must_==1
     }
 
 TODO: add link to scala school lesson on Specs
