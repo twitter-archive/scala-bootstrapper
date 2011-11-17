@@ -115,7 +115,12 @@ if File.exists?("src/scripts/startup.sh")
   $files << startup
 end
 
-[ "src/scripts/#{project_name.downcase}.sh", "src/scripts/console", "run" ].each do |executable|
+[
+  "src/scripts/#{project_name.downcase}.sh",
+  "src/scripts/console",
+  "src/scripts/devel.sh",
+  "run"
+].each do |executable|
   `chmod +x #{executable}` if File.exists?(executable)
 end
 

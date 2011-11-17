@@ -1,18 +1,20 @@
 package com.twitter.birdname
 
-import org.specs.Specification
+import com.twitter.conversions.time._
 import com.twitter.ostrich.admin._
 import com.twitter.util._
-import com.twitter.conversions.time._
+import org.specs.Specification
+import thrift._
 
 abstract class AbstractSpec extends Specification {
   val env = RuntimeEnvironment(this, Array("-f", "config/test.scala"))
+
   lazy val birdName = {
-    val out = env.loadRuntimeConfig[BirdNameService]
+    val out = env.loadRuntimeConfig[BirdNameService.ThriftServer]
 
     // You don't really want the thrift server active, particularly if you
     // are running repetitively via ~test
-    ServiceTracker.shutdown // all services
+    ServiceTracker.shutdown() // all services
     out
   }
 }

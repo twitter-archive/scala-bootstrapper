@@ -8,11 +8,12 @@ Gem::Specification.new do |s|
   s.version = "0.9.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = [%q{Kyle Maxwell}]
-  s.date = %q{2011-10-14}
+  s.authors = ["Kyle Maxwell"]
+  s.date = %q{2011-11-17}
+  s.default_executable = %q{scala-bootstrapper}
   s.description = %q{Twitter scala project init}
   s.email = %q{kmaxwell@twitter.com}
-  s.executables = [%q{scala-bootstrapper}]
+  s.executables = ["scala-bootstrapper"]
   s.extra_rdoc_files = [
     "LICENSE",
     "README.rdoc"
@@ -51,14 +52,15 @@ Gem::Specification.new do |s|
     "vendor/trollop.rb"
   ]
   s.homepage = %q{http://github.com/fizx/scala-bootstrapper}
-  s.require_paths = [%q{lib}]
-  s.rubygems_version = %q{1.8.5}
+  s.require_paths = ["lib"]
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{Twitter scala project init}
 
   if s.respond_to? :specification_version then
+    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
-    if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
       s.add_development_dependency(%q<thoughtbot-shoulda>, [">= 0"])
     else
       s.add_dependency(%q<thoughtbot-shoulda>, [">= 0"])
