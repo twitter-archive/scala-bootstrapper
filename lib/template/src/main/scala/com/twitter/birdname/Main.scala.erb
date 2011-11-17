@@ -6,7 +6,7 @@ import thrift._
 
 object Main {
   private val log = Logger.get(getClass)
-  
+
   def main(args: Array[String]) {
     val env = RuntimeEnvironment(this, args)
     val service = env.loadRuntimeConfig[BirdNameService.ThriftServer]()
