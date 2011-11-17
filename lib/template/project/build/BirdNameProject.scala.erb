@@ -18,7 +18,7 @@ class BirdNameProject(info: ProjectInfo) extends StandardServiceProject(info)
   with CompileThriftRuby
   with CompileThriftScroogeMixin
 {
-  val finagleVersion = "1.9.5"
+  val finagleVersion = "1.9.6"
 
   val finagleC = "com.twitter" % "finagle-core" % finagleVersion
   val finagleT = "com.twitter" % "finagle-thrift" % finagleVersion

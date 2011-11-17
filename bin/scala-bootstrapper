@@ -86,7 +86,7 @@ end
 
 root = File.expand_path(File.dirname(__FILE__) + "/../lib/template")
 
-Dir["#{root}/**/*"].select{|path| File.file?(path)}.each do |path|
+Dir["#{root}/**/*"].select { |path| File.file?(path) }.each do |path|
   relative = path.sub("#{root}/", "")
   content = File.read(path)
   template = ERB.new(content, nil, nil, "@output")

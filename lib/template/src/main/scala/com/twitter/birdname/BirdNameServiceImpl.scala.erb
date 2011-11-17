@@ -10,6 +10,7 @@ import thrift._
 class BirdNameServiceImpl(config: BirdNameServiceConfig) extends BirdNameService.ThriftServer {
   val serverName = "BirdName"
   val thriftPort = config.thriftPort
+  override val tracerFactory = config.tracerFactory
 
   /**
    * These services are based on finagle, which implements a nonblocking server.  If you
