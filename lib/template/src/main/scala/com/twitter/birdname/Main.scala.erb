@@ -1,12 +1,16 @@
 package com.twitter.birdname
 
+import com.twitter.logging.Logger
 import com.twitter.ostrich.admin.RuntimeEnvironment
+import thrift._
 
 object Main {
+  private val log = Logger.get(getClass)
+
   def main(args: Array[String]) {
     val env = RuntimeEnvironment(this, args)
-    val service = env.loadRuntimeConfig[BirdNameServiceServer]
+    val service = env.loadRuntimeConfig[BirdNameService.ThriftServer]()
     service.start()
+    log.info("BirdName %s started.", env.jarVersion)
   }
 }
-

@@ -1,13 +1,16 @@
 package com.twitter.birdname
 
+import com.twitter.logging.Logger
+import com.twitter.util._
 import java.util.concurrent.Executors
 import scala.collection.mutable
-import com.twitter.util._
 import config._
+import thrift._
 
-class BirdNameServiceImpl(config: BirdNameServiceConfig) extends BirdNameServiceServer {
+class BirdNameServiceImpl(config: BirdNameServiceConfig) extends BirdNameService.ThriftServer {
   val serverName = "BirdName"
   val thriftPort = config.thriftPort
+  override val tracerFactory = config.tracerFactory
 
   /**
    * These services are based on finagle, which implements a nonblocking server.  If you
@@ -15,7 +18,6 @@ class BirdNameServiceImpl(config: BirdNameServiceConfig) extends BirdNameService
    * a thread pool, so that you don't block the main event loop.  This thread pool is only
    * needed for these blocking actions.  The code looks like:
    *
-   *     // Depends on com.twitter.util >= 1.6.10
    *     val futurePool = new FuturePool(Executors.newFixedThreadPool(config.threadPoolSize))
    *
    *     def hello() = futurePool {
@@ -40,6 +42,6 @@ class BirdNameServiceImpl(config: BirdNameServiceConfig) extends BirdNameService
   def put(key: String, value: String) = {
     log.debug("put %s", key)
     database(key) = value
-    Future.void
+    Future.Unit
   }
 }
