@@ -38,7 +38,7 @@ fi
 
 case "$1" in
   start)
-    echo -n "Starting $APP_NAME... "
+    printf "Starting %s... " "$APP_NAME"
 
     if running; then
       echo "already running."
@@ -60,7 +60,7 @@ case "$1" in
   ;;
 
   stop)
-    echo -n "Stopping $APP_NAME... "
+    printf "Stopping %s... " "$APP_NAME"
 
     if [ ! -f $PIDFILE ]; then
       GUESSED_PID=`pgrep -u $USER java`
