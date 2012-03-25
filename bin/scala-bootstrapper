@@ -130,6 +130,10 @@ end
   `chmod +x #{executable}` if File.exists?(executable)
 end
 
+if sbt11_requested
+  `chmod +x console` if File.exists?('console')
+end
+ 
 if git
   $files.each { |file| sys("git add #{file}") if File.exists?(file) }
   sys("git commit -m'scala-bootstrapper'", false) # fails if no change
