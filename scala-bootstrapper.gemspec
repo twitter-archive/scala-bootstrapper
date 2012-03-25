@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
     "lib/template/src/scripts/startup.sh",
     "lib/template/src/test/scala/com/twitter/birdname/AbstractSpec.scala.erb",
     "lib/template/src/test/scala/com/twitter/birdname/BirdNameServiceSpec.scala.erb",
+    "lib/template2/**",
     "scala-bootstrapper.gemspec",
     "vendor/trollop.rb"
   ]

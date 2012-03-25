@@ -1,0 +1,46 @@
+package com.twitter.birdname
+
+import com.twitter.finagle.builder.ClientBuilder
+import com.twitter.finagle.thrift.ThriftClientFramedCodec
+import java.net.InetSocketAddress
+
+import com.twitter.conversions.time._
+
+import scala.tools.nsc.interpreter._
+import scala.tools.nsc.interpreter.{JLineReader,JLineCompletion,ILoop,NamedParam}
+import scala.tools.nsc.Settings
+
+object BirdNameConsoleClient extends App {
+		
+	val service = ClientBuilder()
+	.hosts(new InetSocketAddress(args(0),args(1).toInt))
+	.codec(ThriftClientFramedCodec())
+    .hostConnectionLimit(1)
+	.tcpConnectTimeout(3.seconds)
+    .build()
+	
+	val client = new BirdNameService.FinagledClient(service)
+	
+	val intLoop = new ILoop
+	
+	Console.println("'client' has been binded.  With it you can query different thrift methods your service exposes.")
+	intLoop.setPrompt("\nfinagle-client> ")
+	
+	intLoop.settings = {
+		val s = new Settings(Console.println)
+		s.embeddedDefaults[BirdNameService.FinagledClient]
+		s.Yreplsync.value = true
+		s
+	}
+	
+	intLoop.createInterpreter()
+	intLoop.in =  new JLineReader(new JLineCompletion(intLoop))
+	
+	intLoop.intp.beQuietDuring {
+		intLoop.intp.interpret("""def exit = println("Type :quit to resume program execution.")""")
+		intLoop.intp.bind(NamedParam("client",client))
+	}
+	
+	intLoop.loop
+	intLoop.closeInterpreter
+}
