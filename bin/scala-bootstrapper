@@ -8,7 +8,6 @@ opts = Trollop::options do
   opt :public, "Use the public twitter maven repo"
   opt :namespace, "Use something besides com.twitter", :type => :string
   opt :git, "Use Git to track updates to generated files"
-  opt :sbt11, "Setup an SBT 0.11 and Finagle2 skeleton"
 end
 
 
@@ -87,11 +86,7 @@ if git
   end
 end
 
-if sbt11_requested
-  root = File.expand_path(File.dirname(__FILE__) + "/../lib/template2")
-else
-  root = File.expand_path(File.dirname(__FILE__) + "/../lib/template")
-end
+root = File.expand_path(File.dirname(__FILE__) + "/../lib/template")
 
 Dir["#{root}/**/*"].select{|path| File.file?(path)}.each do |path|
   relative = path.sub("#{root}/", "")
@@ -126,12 +121,8 @@ if File.exists?("src/scripts/startup.sh")
   $files << startup
 end
 
-[ "src/scripts/#{project_name.downcase}.sh", "src/scripts/console", "run" ].each do |executable|
+[ "src/scripts/#{project_name.downcase}.sh", "console", "run" ].each do |executable|
   `chmod +x #{executable}` if File.exists?(executable)
-end
-
-if sbt11_requested
-  `chmod +x console` if File.exists?('console')
 end
  
 if git
