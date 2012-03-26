@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
     "LICENSE",
     "README.rdoc"
   ]
-  s.files = [
+  s.files = Dir.glob("lib/template/**/*") + [
     ".document",
     "HACKING",
     "LICENSE",
@@ -26,25 +26,6 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "bin/scala-bootstrapper",
-    "lib/template/.gitignore",
-    "lib/template/Capfile",
-    "lib/template/Gemfile",
-    "lib/template/config/development.scala.erb",
-    "lib/template/config/production.scala.erb",
-    "lib/template/config/staging.scala.erb",
-    "lib/template/config/test.scala.erb",
-    "lib/template/project/build.properties",
-    "lib/template/project/build/BirdNameProject.scala.erb",
-    "lib/template/project/plugins/Plugins.scala.erb",
-    "lib/template/run",
-    "lib/template/src/main/scala/com/twitter/birdname/BirdNameServiceImpl.scala.erb",
-    "lib/template/src/main/scala/com/twitter/birdname/Main.scala.erb",
-    "lib/template/src/main/scala/com/twitter/birdname/config/BirdNameServiceConfig.scala.erb",
-    "lib/template/src/main/thrift/birdname.thrift.erb",
-    "lib/template/src/scripts/console.erb",
-    "lib/template/src/scripts/startup.sh",
-    "lib/template/src/test/scala/com/twitter/birdname/AbstractSpec.scala.erb",
-    "lib/template/src/test/scala/com/twitter/birdname/BirdNameServiceSpec.scala.erb",
     "scala-bootstrapper.gemspec",
     "vendor/trollop.rb"
   ]

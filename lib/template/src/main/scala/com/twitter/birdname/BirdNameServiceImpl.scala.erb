@@ -5,7 +5,7 @@ import scala.collection.mutable
 import com.twitter.util._
 import config._
 
-class BirdNameServiceImpl(config: BirdNameServiceConfig) extends BirdNameServiceServer {
+class BirdNameServiceImpl(config: BirdNameServiceConfig) extends BirdNameService.ThriftServer {
   val serverName = "BirdName"
   val thriftPort = config.thriftPort
 
@@ -40,6 +40,6 @@ class BirdNameServiceImpl(config: BirdNameServiceConfig) extends BirdNameService
   def put(key: String, value: String) = {
     log.debug("put %s", key)
     database(key) = value
-    Future.void
+    Future.Unit
   }
 }

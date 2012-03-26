@@ -55,6 +55,8 @@ project_name = ARGV.pop.camelize(true)
 is_public = opts[:public]
 namespace = opts[:namespace] || "com.twitter"
 git = opts[:git]
+sbt11_requested = opts[:sbt11]
+
 $overwrite_all = true if git
 $ex_post_facto = false
 $branch = 'master'
@@ -95,12 +97,16 @@ Dir["#{root}/**/*"].select{|path| File.file?(path)}.each do |path|
     print "File exists `#{relative}`, replace? ([Y]es, [N]o, [A]ll, [Q]uit)"
     $stdout.flush
     case STDIN.gets
-    when /^y/i: # continue
-    when /^n/i: next
-    when /^a/i: $overwrite_all = true
-    when /^q/i: exit(2)
+    when /^y/i
+      #continue
+    when /^n/i 
+      next
+    when /^a/i 
+      $overwrite_all = true
+    when /^q/i 
+      exit(2)
     else
-      retry
+      redo
     end
   end
   puts "writing #{target_path}"
@@ -115,10 +121,10 @@ if File.exists?("src/scripts/startup.sh")
   $files << startup
 end
 
-[ "src/scripts/#{project_name.downcase}.sh", "src/scripts/console", "run" ].each do |executable|
+[ "src/scripts/#{project_name.downcase}.sh", "console", "run" ].each do |executable|
   `chmod +x #{executable}` if File.exists?(executable)
 end
-
+ 
 if git
   $files.each { |file| sys("git add #{file}") if File.exists?(file) }
   sys("git commit -m'scala-bootstrapper'", false) # fails if no change
