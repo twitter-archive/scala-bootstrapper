@@ -88,7 +88,7 @@ end
 
 root = File.expand_path(File.dirname(__FILE__) + "/../lib/template")
 
-Dir["#{root}/**/*"].select{|path| File.file?(path)}.each do |path|
+Dir["#{root}/**/*"].select { |path| File.file?(path) }.each do |path|
   relative = path.sub("#{root}/", "")
   content = File.read(path)
   template = ERB.new(content, nil, nil, "@output")
@@ -121,7 +121,11 @@ if File.exists?("src/scripts/startup.sh")
   $files << startup
 end
 
-[ "src/scripts/#{project_name.downcase}.sh", "console", "run" ].each do |executable|
+[
+  "src/scripts/#{project_name.downcase}.sh",
+  "src/scripts/devel.sh",
+  "console",
+].each do |executable|
   `chmod +x #{executable}` if File.exists?(executable)
 end
  

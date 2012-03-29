@@ -137,10 +137,10 @@ we just added.
 
     "verify stats" in {
       val counters = Stats.getCounters
-      foofa.put("name", "bluebird")()
-      foofa.get("name")() mustEqual "bluebird"
-      counters.getOrElse("foofa.gets", 1) must_==1
-      counters.getOrElse("foofa.puts", 1) must_==1
+      birdname.put("name", "bluebird")()
+      birdname.get("name")() mustEqual "bluebird"
+      counters.getOrElse("birdname.gets", 1) must_==1
+      counters.getOrElse("birdname.puts", 1) must_==1
     }
 
 TODO: add link to scala school lesson on Specs
