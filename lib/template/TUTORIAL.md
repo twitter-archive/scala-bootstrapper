@@ -76,7 +76,7 @@ Ostrich also stores historial stats data and can build
 
 You can ask the server to shutdown over the admin port also:
 
-    $ curl localhost:9990/shutdown.txt
+    $ curl localhost:9900/shutdown.txt
     ok
 
 ### View the implementation of get() and put()
