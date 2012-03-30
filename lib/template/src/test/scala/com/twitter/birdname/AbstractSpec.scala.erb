@@ -4,7 +4,6 @@ import com.twitter.conversions.time._
 import com.twitter.ostrich.admin._
 import com.twitter.util._
 import org.specs.Specification
-import thrift._
 
 abstract class AbstractSpec extends Specification {
   val env = RuntimeEnvironment(this, Array("-f", "config/test.scala"))
