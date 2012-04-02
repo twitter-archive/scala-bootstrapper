@@ -1,6 +1,11 @@
 import com.twitter.sbt._
 
-seq((Project.defaultSettings ++ StandardProject.newSettings ++ SubversionPublisher.newSettings ++ CompileThriftScrooge.newSettings): _*)
+seq((
+  Project.defaultSettings ++
+  StandardProject.newSettings ++
+  SubversionPublisher.newSettings ++
+  CompileThriftScrooge.newSettings
+): _*)
 
 organization := "com.twitter"
 
@@ -21,4 +26,3 @@ libraryDependencies ++= Seq(
 mainClass in (Compile, run) := Some("com.twitter.birdname.Main")
 
 mainClass in (Compile, packageBin) := Some("com.twitter.birdname.Main")
-
