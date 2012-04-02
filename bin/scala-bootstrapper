@@ -99,11 +99,11 @@ Dir["#{root}/**/*"].select { |path| File.file?(path) }.each do |path|
     case STDIN.gets
     when /^y/i
       #continue
-    when /^n/i 
+    when /^n/i
       next
-    when /^a/i 
+    when /^a/i
       $overwrite_all = true
-    when /^q/i 
+    when /^q/i
       exit(2)
     else
       redo
@@ -128,7 +128,7 @@ end
 ].each do |executable|
   `chmod +x #{executable}` if File.exists?(executable)
 end
- 
+
 if git
   $files.each { |file| sys("git add #{file}") if File.exists?(file) }
   sys("git commit -m'scala-bootstrapper'", false) # fails if no change
