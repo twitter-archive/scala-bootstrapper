@@ -14,7 +14,8 @@ libraryDependencies ++= Seq(
   "com.twitter" %% "finagle-core" % "2.0.1",
   "com.twitter" %% "finagle-thrift" % "2.0.1",
   "com.twitter" %% "finagle-ostrich4" % "2.0.1",
-  "org.scala-tools.testing" %% "specs" % "1.6.9" % "test"
+  "org.scalatest" %% "scalatest" % "1.7.1" % "test",
+  "com.twitter" %% "scalatest-mixins" % "1.0.0" % "test"
 )
 
 mainClass in (Compile, run) := Some("com.twitter.birdname.Main")
