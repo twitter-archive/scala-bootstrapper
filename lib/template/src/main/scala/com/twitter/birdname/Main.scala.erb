@@ -1,16 +1,22 @@
 package com.twitter.birdname
 
 import com.twitter.logging.Logger
-import com.twitter.ostrich.admin.RuntimeEnvironment
-import thrift._
+import com.twitter.ostrich.admin.{RuntimeEnvironment, ServiceTracker}
 
 object Main {
   private val log = Logger.get(getClass)
 
   def main(args: Array[String]) {
-    val env = RuntimeEnvironment(this, args)
-    val service = env.loadRuntimeConfig[BirdNameService.ThriftServer]()
-    service.start()
-    log.info("BirdName %s started.", env.jarVersion)
+    val runtime = RuntimeEnvironment(this, args)
+    val server = runtime.loadRuntimeConfig[BirdNameService.ThriftServer]
+    try {
+      log.info("Starting BirdNameService")
+      server.start()
+    } catch {
+      case e: Exception =>
+        log.error(e, "Failed starting BirdNameService, exiting")
+        ServiceTracker.shutdown()
+        System.exit(1)
+    }
   }
 }

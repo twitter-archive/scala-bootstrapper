@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ $# -lt 2 ] ; then
+	echo "usage: console <host> <port>"
+	exit 0
+fi
+
+sbt "run-main com.twitter.birdname.BirdNameConsoleClient $1 $2"

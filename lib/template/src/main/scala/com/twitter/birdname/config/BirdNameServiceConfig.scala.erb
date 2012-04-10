@@ -7,7 +7,6 @@ import com.twitter.logging.config._
 import com.twitter.ostrich.admin.{RuntimeEnvironment, ServiceTracker}
 import com.twitter.ostrich.admin.config._
 import com.twitter.util.Config
-import thrift._
 
 class BirdNameServiceConfig extends ServerConfig[BirdNameService.ThriftServer] {
   var thriftPort: Int = 9999

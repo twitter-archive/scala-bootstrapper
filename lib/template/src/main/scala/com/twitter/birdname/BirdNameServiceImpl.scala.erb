@@ -5,7 +5,6 @@ import com.twitter.util._
 import java.util.concurrent.Executors
 import scala.collection.mutable
 import config._
-import thrift._
 
 class BirdNameServiceImpl(config: BirdNameServiceConfig) extends BirdNameService.ThriftServer {
   val serverName = "BirdName"

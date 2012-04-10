@@ -55,6 +55,8 @@ project_name = ARGV.pop.camelize(true)
 is_public = opts[:public]
 namespace = opts[:namespace] || "com.twitter"
 git = opts[:git]
+sbt11_requested = opts[:sbt11]
+
 $overwrite_all = true if git
 $ex_post_facto = false
 $branch = 'master'
@@ -95,12 +97,16 @@ Dir["#{root}/**/*"].select { |path| File.file?(path) }.each do |path|
     print "File exists `#{relative}`, replace? ([Y]es, [N]o, [A]ll, [Q]uit)"
     $stdout.flush
     case STDIN.gets
-    when /^y/i: # continue
-    when /^n/i: next
-    when /^a/i: $overwrite_all = true
-    when /^q/i: exit(2)
+    when /^y/i
+      #continue
+    when /^n/i
+      next
+    when /^a/i
+      $overwrite_all = true
+    when /^q/i
+      exit(2)
     else
-      retry
+      redo
     end
   end
   puts "writing #{target_path}"
@@ -117,9 +123,8 @@ end
 
 [
   "src/scripts/#{project_name.downcase}.sh",
-  "src/scripts/console",
   "src/scripts/devel.sh",
-  "run"
+  "console",
 ].each do |executable|
   `chmod +x #{executable}` if File.exists?(executable)
 end

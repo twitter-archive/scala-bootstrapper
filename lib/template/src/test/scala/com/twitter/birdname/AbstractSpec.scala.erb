@@ -2,12 +2,12 @@ package com.twitter.birdname
 
 import com.twitter.conversions.time._
 import com.twitter.ostrich.admin._
+import com.twitter.scalatest.TestLogging
 import com.twitter.util._
-import org.specs.Specification
-import thrift._
+import org.scalatest._
 
-abstract class AbstractSpec extends Specification {
-  val env = RuntimeEnvironment(this, Array("-f", "config/test.scala"))
+abstract class AbstractSpec extends FunSpec with TestLogging {
+  lazy val env = RuntimeEnvironment(this, Array("-f", "config/test.scala"))
 
   lazy val birdName = {
     val out = env.loadRuntimeConfig[BirdNameService.ThriftServer]
