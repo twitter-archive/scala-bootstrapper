@@ -1,5 +1,6 @@
 package com.twitter.birdname
 
+import com.twitter.conversions.time._
 import com.twitter.logging.Logger
 import com.twitter.util._
 import java.util.concurrent.Executors
@@ -31,7 +32,7 @@ class BirdNameServiceImpl(config: BirdNameServiceConfig) extends BirdNameService
     database.get(key) match {
       case None =>
         log.debug("get %s: miss", key)
-        Future.exception(new BirdNameException("No such key"))
+        Future.exception(BirdNameException("No such key"))
       case Some(value) =>
         log.debug("get %s: hit", key)
         Future(value)
@@ -42,5 +43,9 @@ class BirdNameServiceImpl(config: BirdNameServiceConfig) extends BirdNameService
     log.debug("put %s", key)
     database(key) = value
     Future.Unit
+  }
+
+  def shutdown() = {
+    super.shutdown(0.seconds)
   }
 }

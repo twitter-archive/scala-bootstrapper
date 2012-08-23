@@ -125,6 +125,7 @@ end
   "src/scripts/#{project_name.downcase}.sh",
   "src/scripts/devel.sh",
   "console",
+  "sbt",
 ].each do |executable|
   `chmod +x #{executable}` if File.exists?(executable)
 end
