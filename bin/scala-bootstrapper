@@ -127,7 +127,7 @@ end
   "console",
   "sbt",
 ].each do |executable|
-  `chmod +x #{executable}` if File.exists?(executable)
+  FileUtils.chmod("a=+x", executable) if File.exists?(executable)
 end
 
 if git
