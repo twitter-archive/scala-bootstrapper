@@ -117,7 +117,7 @@ end
 
 if File.exists?("src/scripts/startup.sh")
   startup = "src/scripts/#{project_name.downcase}.sh"
-  `mv src/scripts/startup.sh #{startup}`
+  FileUtils.mv("src/scripts/startup.sh", "#{startup}")
   $files << startup
 end
 
