@@ -3,6 +3,7 @@ Twitter is no longer maintaining this project or responding to issues or PRs.
 
 This gem produces a skeleton finagled service directory to be used with the new SBT 0.11 and Scala 2.9.1
 
+{<img src="https://secure.travis-ci.org/twitter/scala-bootstrapper.png" />}[http://travis-ci.org/twitter/scala-bootstrapper]
 -----
 
 This creates a standard environment for your twitter-centric sbt/scala thrift service.
