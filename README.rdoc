@@ -7,8 +7,9 @@ This gem produces a skeleton finagled service directory to be used with the new 
 
 This creates a standard environment for your twitter-centric sbt/scala thrift service.
 
-Building:
+Building (you may need to run as sudo):
 
+    :$ gem install jeweler
     :$ rake build
     :$ gem install pkg/scala-bootstrapper-*.gem
 
